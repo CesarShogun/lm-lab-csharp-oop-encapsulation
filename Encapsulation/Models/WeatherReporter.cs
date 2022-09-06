@@ -3,53 +3,46 @@ namespace Encapsulation.Models
 {
     public class WeatherReporter
     {
-        public string Location;
-        public double Temperature;
+        private readonly string _location;
+        private double _temperature;
+        private const int HOT_THRESHHOLD = 30;
+        private const int COLD_THRESHHOLD = 10;
 
         public WeatherReporter(string location, double temperature)
         {
-            Location = location;
-            Temperature = temperature;
+            _location = location;
+            _temperature = temperature;
         }
 
-        public string Print()
+        public void Report()
         {
-            double newTemp = (9.0 / 5.0) * Temperature + 32;
-            return $"I am in {Location} and it is {Check1()}. {Check2()}. The temperature in Fahrenheit is {newTemp}.";
+            Console.Out.WriteLine($"I am in {_location} and it is {DisplayLocationIcon()}. {DisplayTempReaction()}. The temperature in Fahrenheit is {(9.0 / 5.0) * _temperature + 32}.");
         }
 
-        public string Check1()
+        private String DisplayLocationIcon()
         {
-            if (Location == "London")
+            switch (_location)
             {
-
-                return "🌦";
-
+                case "London":
+                    return "🌦";
+                case "California":
+                    return "🌅";
+                case "Cape Town":
+                    return "🌤";
             }
-            else if (Location == "California")
-            {
 
-                return "🌅";
-
-            }
-            else if (Location == "Cape Town")
-            {
-
-                return "🌤";
-
-            }
             return "🔆";
         }
 
-        public string Check2()
+        private string DisplayTempReaction()
         {
-            if (Temperature > 30)
+            if (_temperature > HOT_THRESHHOLD)
             {
 
                 return "It's too hot 🥵!";
 
             }
-            else if (Temperature < 10)
+            else if (_temperature < COLD_THRESHHOLD)
             {
 
                 return "It's too cold 🥶!";
