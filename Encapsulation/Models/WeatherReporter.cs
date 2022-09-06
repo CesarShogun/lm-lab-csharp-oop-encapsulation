@@ -4,7 +4,7 @@ namespace Encapsulation.Models
     public class WeatherReporter
     {
         private readonly string _location;
-        private double _temperature;
+        private readonly double _temperature;
         private const int HOT_THRESHHOLD = 30;
         private const int COLD_THRESHHOLD = 10;
 
